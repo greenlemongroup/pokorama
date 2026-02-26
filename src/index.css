@@ -1,0 +1,134 @@
+@font-face {
+  font-family: "LT Saeada";
+  src: url("./assets/fonts/LTSaeada-Medium.otf") format("opentype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.landing {
+  --bottom-pad: clamp(2rem, 6vh, 4rem);
+  --top-pad: var(--bottom-pad);
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: var(--top-pad) 1rem var(--bottom-pad);
+}
+
+.content {
+  width: min(100%, 40rem);
+  min-height: calc(100vh - var(--top-pad) - var(--bottom-pad));
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+/* Base pokorama logo style */
+.game-title {
+  font-family: "LT Saeada", sans-serif;
+  font-weight: 500;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.store-link {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 1.25rem;
+}
+
+.store-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.95);
+  outline-offset: 4px;
+}
+
+.store-widget {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: clamp(160px, 32vw, 192px);
+  height: clamp(48px, 8vw, 56px);
+  padding: 0 1rem;
+  border-radius: 1.25rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
+  color: #ffffff;
+  transition: background-color 120ms ease-in-out;
+  transform-origin: center;
+}
+
+.store-link:hover .store-widget {
+  background: rgba(0, 0, 0, 0.52);
+  animation: cta-pulsate 700ms ease-in-out infinite alternate;
+}
+
+.store-icon {
+  font-size: 1.5rem;
+  flex: 0 0 auto;
+}
+
+.store-label {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@keyframes cta-pulsate {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 640px) {
+  .game-title {
+    font-size: 3rem;
+  }
+}
