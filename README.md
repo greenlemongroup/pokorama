@@ -24,9 +24,18 @@ Then open the local URL printed by Vite (typically `http://localhost:5173`).
 - `make build` - build production bundle
 - `make preview` - preview production bundle locally
 - `make lint` - run ESLint
+- `make format` - format repository with Prettier
+- `make tidy` - alias for `make format`
+- `make format-check` - check formatting without changing files
 - `make typecheck` - run TypeScript checks
 - `make test` - currently mapped to typecheck as a starter baseline
+- `make setup-hooks` - install local git hooks path (`.githooks`)
 - `make clean` - remove local build output
+
+Git push lint enforcement:
+
+- Pre-push hook at `.githooks/pre-push` runs `make lint`
+- `make init` also runs `make setup-hooks` so the hook is active
 
 ## CDN Asset Strategy
 

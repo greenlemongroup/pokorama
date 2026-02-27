@@ -49,8 +49,7 @@ body,
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding:
-    calc(var(--top-pad) + env(safe-area-inset-top))
+  padding: calc(var(--top-pad) + env(safe-area-inset-top))
     calc(1rem + env(safe-area-inset-right))
     calc(var(--bottom-pad) + env(safe-area-inset-bottom))
     calc(1rem + env(safe-area-inset-left));
