@@ -24,13 +24,13 @@ body,
 #root {
   margin: 0;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .landing {
   --bottom-pad: clamp(2rem, 6vh, 4rem);
   --top-pad: var(--bottom-pad);
-  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   background-size: cover;
   background-position: center center;
@@ -38,17 +38,22 @@ body,
   display: flex;
   justify-content: center;
   align-items: stretch;
-  padding: var(--top-pad) 1rem var(--bottom-pad);
+  padding: 0;
 }
 
 .content {
   width: min(100%, 40rem);
-  min-height: calc(100vh - var(--top-pad) - var(--bottom-pad));
+  min-height: 100dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding:
+    calc(var(--top-pad) + env(safe-area-inset-top))
+    calc(1rem + env(safe-area-inset-right))
+    calc(var(--bottom-pad) + env(safe-area-inset-bottom))
+    calc(1rem + env(safe-area-inset-left));
   text-align: center;
 }
 
