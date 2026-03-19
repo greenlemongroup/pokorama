@@ -1,4 +1,4 @@
-const CDN_BASE_URL = "https://cdn.pokorama.com";
+const CDN_BASE_URL = "https://cdn.pokorama.com/play";
 const CATALOG_PATH = "catalog.json";
 
 type CatalogLinks = Record<string, string>;

@@ -32,6 +32,7 @@ body,
   --top-pad: var(--bottom-pad);
   min-height: 100dvh;
   width: 100%;
+  background-color: #000000;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -65,6 +66,29 @@ body,
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.cta-panel {
+  width: min(100%, 33rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2.2rem 1.85rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.cta-copy {
+  margin: 0;
+  color: #000000;
+  font-size: 1.22rem;
+  line-height: 1.65;
+  text-align: justify;
+}
+
 .store-buttons {
   display: flex;
   justify-content: center;
@@ -77,62 +101,144 @@ body,
   display: inline-flex;
   text-decoration: none;
   color: inherit;
-  border-radius: 1.25rem;
+  border-radius: 999px;
 }
 
-.store-link:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.95);
-  outline-offset: 4px;
+.slots-counter-button {
+  --clicker-button-size: 48px;
+  --clicker-button-icon-size: 24px;
+  --clicker-button-gap: 7px;
+  --clicker-button-padding-x: 6px;
+  --clicker-button-font-size: 16px;
+  display: inline-flex;
+  position: relative;
+  isolation: isolate;
+  align-items: center;
+  justify-content: center;
+  gap: var(--clicker-button-gap);
+  max-width: 100%;
+  min-width: 12.5rem;
+  height: var(--clicker-button-size);
+  padding: 0 var(--clicker-button-padding-x);
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  filter: none;
+  transition: filter 0.2s ease;
 }
 
-.store-widget {
+.slots-counter-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(77, 77, 77, 0.4);
+  opacity: 0.7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.slots-counter-button:hover::before {
+  opacity: 1;
+}
+
+@keyframes slots-counter-button-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.slots-counter-button:hover {
+  animation: slots-counter-button-pulse 0.9s ease-in-out infinite;
+  filter: brightness(1.12);
+}
+
+.slots-counter-button:active {
+  animation: none;
+  transform: scale(0.97);
+  filter: brightness(1.2);
+}
+
+.slots-counter-button:focus-visible {
+  outline: none;
+}
+
+.slots-counter-button__icon {
+  position: relative;
+  z-index: 1;
+  width: var(--clicker-button-icon-size);
+  height: var(--clicker-button-icon-size);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  min-width: clamp(160px, 32vw, 192px);
-  height: clamp(48px, 8vw, 56px);
-  padding: 0 1rem;
-  border-radius: 1.25rem;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.42);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
-  color: #ffffff;
-  transition: background-color 120ms ease-in-out;
-  transform-origin: center;
-}
-
-.store-link:hover .store-widget {
-  background: rgba(0, 0, 0, 0.52);
-  animation: cta-pulsate 700ms ease-in-out infinite alternate;
-}
-
-.store-icon {
-  font-size: 1.5rem;
   flex: 0 0 auto;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
 }
 
-.store-label {
+.slots-counter-button__icon img,
+.slots-counter-button__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: inherit;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.slots-counter-button__icon img {
+  filter: brightness(0) invert(1);
+}
+
+.slots-counter-button__text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
   line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
-@keyframes cta-pulsate {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.04);
+@media (prefers-reduced-motion: reduce) {
+  .slots-counter-button:hover {
+    animation: none;
   }
 }
 
 @media (max-width: 640px) {
   .game-title {
     font-size: 3rem;
+  }
+
+  .cta-panel {
+    gap: 1.8rem;
+    padding: 1.6rem 1.25rem;
+  }
+
+  .cta-copy {
+    font-size: 1.08rem;
   }
 }
