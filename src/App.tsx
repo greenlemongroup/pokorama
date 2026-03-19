@@ -40,7 +40,7 @@ function App() {
           <span className="steam-wishlist-button__icon" aria-hidden="true">
             <FaSteamSymbol />
           </span>
-          <span className="steam-wishlist-button__text">Visit on Steam</span>
+          <span className="steam-wishlist-button__text">Steam</span>
         </a>
       </div>
       <section className="content">

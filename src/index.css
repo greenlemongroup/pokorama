@@ -232,9 +232,10 @@ body,
 }
 
 .steam-wishlist-button--big {
-  --clicker-button-size: 52px;
-  --clicker-button-icon-size: 20px;
-  --clicker-button-padding-x: 20px;
+  --clicker-button-size: 44px;
+  --clicker-button-icon-size: 18px;
+  --clicker-button-gap: 10px;
+  --clicker-button-padding-x: 18px;
   --clicker-button-font-size: 14px;
 }
 
