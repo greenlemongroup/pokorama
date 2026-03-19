@@ -32,6 +32,7 @@ body,
   --top-pad: var(--bottom-pad);
   min-height: 100dvh;
   width: 100%;
+  position: relative;
   background-color: #000000;
   background-size: cover;
   background-position: center center;
@@ -40,6 +41,13 @@ body,
   justify-content: center;
   align-items: stretch;
   padding: 0;
+}
+
+.top-left-actions {
+  position: absolute;
+  top: calc(1rem + env(safe-area-inset-top));
+  left: calc(1rem + env(safe-area-inset-left));
+  z-index: 2;
 }
 
 .content {
@@ -104,6 +112,132 @@ body,
   border-radius: 999px;
 }
 
+.steam-wishlist-button {
+  --clicker-button-size: 40px;
+  --clicker-button-icon-size: 16px;
+  --clicker-button-gap: 10px;
+  --clicker-button-padding-x: 16px;
+  --clicker-button-font-size: 12px;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--clicker-button-gap);
+  min-width: max-content;
+  height: var(--clicker-button-size);
+  padding: 0 var(--clicker-button-padding-x);
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  filter: none;
+  transition: filter 0.2s ease;
+}
+
+@keyframes steam-wishlist-button-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.steam-wishlist-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: rgba(77, 77, 77, 0.4);
+  opacity: 0.7;
+  box-shadow: none;
+  box-sizing: border-box;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.steam-wishlist-button:hover::before {
+  opacity: 1;
+}
+
+.steam-wishlist-button:hover {
+  animation: steam-wishlist-button-pulse 0.9s ease-in-out infinite;
+  filter: brightness(1.12);
+}
+
+.steam-wishlist-button:active {
+  animation: none;
+  transform: scale(0.97);
+  filter: brightness(1.2);
+}
+
+.steam-wishlist-button:focus-visible {
+  outline: none;
+}
+
+.steam-wishlist-button__icon {
+  position: relative;
+  z-index: 1;
+  width: var(--clicker-button-icon-size);
+  height: var(--clicker-button-icon-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #ffffff;
+  filter: none;
+}
+
+.steam-wishlist-button__icon img,
+.steam-wishlist-button__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: inherit;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.steam-wishlist-button__text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.steam-wishlist-button:disabled,
+.steam-wishlist-button[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.steam-wishlist-button--big {
+  --clicker-button-size: 52px;
+  --clicker-button-icon-size: 20px;
+  --clicker-button-padding-x: 20px;
+  --clicker-button-font-size: 14px;
+}
+
 .slots-counter-button {
   --clicker-button-size: 48px;
   --clicker-button-icon-size: 24px;
@@ -135,7 +269,7 @@ body,
   z-index: 0;
   border-radius: inherit;
   border: 1px solid rgba(255, 255, 255, 0.9);
-  background: rgba(77, 77, 77, 0.4);
+  background: rgba(234, 148, 148, 0.7);
   opacity: 0.7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
   box-sizing: border-box;
@@ -223,12 +357,21 @@ body,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .steam-wishlist-button:hover {
+    animation: none;
+  }
+
   .slots-counter-button:hover {
     animation: none;
   }
 }
 
 @media (max-width: 640px) {
+  .top-left-actions {
+    top: calc(0.85rem + env(safe-area-inset-top));
+    left: calc(0.85rem + env(safe-area-inset-left));
+  }
+
   .game-title {
     font-size: 3rem;
   }

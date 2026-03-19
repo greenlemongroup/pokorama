@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { FaSteamSymbol } from "react-icons/fa";
 import { resolveBackgroundImageUrl } from "./lib/catalog";
 
 const pickBackgroundTier = () => {
@@ -28,6 +29,20 @@ function App() {
 
   return (
     <main className="landing" style={{ backgroundImage }}>
+      <div className="top-left-actions">
+        <a
+          href="https://store.steampowered.com/"
+          className="steam-wishlist-button steam-wishlist-button--big"
+          aria-label="Visit on Steam"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="steam-wishlist-button__icon" aria-hidden="true">
+            <FaSteamSymbol />
+          </span>
+          <span className="steam-wishlist-button__text">Visit on Steam</span>
+        </a>
+      </div>
       <section className="content">
         <h1 className="game-title">pokorama</h1>
         <div className="cta-panel">
