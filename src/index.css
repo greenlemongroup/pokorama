@@ -38,31 +38,26 @@ body,
   background-position: center center;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  padding: 0;
-}
-
-.top-left-actions {
-  position: absolute;
-  top: calc(1rem + env(safe-area-inset-top));
-  left: calc(1rem + env(safe-area-inset-left));
-  z-index: 2;
-}
-
-.content {
-  width: min(100%, 40rem);
-  min-height: 100dvh;
-  margin: 0 auto;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: clamp(1.25rem, 4vh, 2.5rem);
   padding: calc(var(--top-pad) + env(safe-area-inset-top))
     calc(1rem + env(safe-area-inset-right))
     calc(var(--bottom-pad) + env(safe-area-inset-bottom))
     calc(1rem + env(safe-area-inset-left));
+}
+
+.content {
+  width: min(100%, 40rem);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   text-align: center;
+  flex: 1 1 auto;
+  padding-top: clamp(1.5rem, 5vh, 3.5rem);
 }
 
 /* Base pokorama logo style */
@@ -70,7 +65,7 @@ body,
   font-family: "LT Saeada", sans-serif;
   font-weight: 500;
   font-size: 4rem;
-  margin-bottom: 1rem;
+  margin: 0 0 clamp(2rem, 8vh, 4.5rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -80,6 +75,7 @@ body,
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
+  margin: auto 0;
   padding: 2.2rem 1.85rem;
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.32);
@@ -110,6 +106,15 @@ body,
   text-decoration: none;
   color: inherit;
   border-radius: 999px;
+}
+
+.bottom-actions {
+  width: min(100%, 44rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(9.5rem, max-content));
+  justify-content: center;
+  gap: 0.75rem;
+  z-index: 2;
 }
 
 .steam-wishlist-button {
@@ -240,51 +245,23 @@ body,
 }
 
 .slots-counter-button {
-  --clicker-button-size: 48px;
-  --clicker-button-icon-size: 24px;
-  --clicker-button-gap: 7px;
-  --clicker-button-padding-x: 6px;
-  --clicker-button-font-size: 16px;
   display: inline-flex;
   position: relative;
-  isolation: isolate;
   align-items: center;
   justify-content: center;
-  gap: var(--clicker-button-gap);
-  max-width: 100%;
-  min-width: 12.5rem;
-  height: var(--clicker-button-size);
-  padding: 0 var(--clicker-button-padding-x);
-  border: none;
+  gap: 0.55rem;
+  min-height: 2.7rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid #e37171;
   border-radius: 999px;
-  background: transparent;
+  background: #ea9494;
   cursor: pointer;
-  filter: none;
-  transition: filter 0.2s ease;
-}
-
-.slots-counter-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: rgba(234, 148, 148, 0.7);
-  opacity: 0.7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-  box-sizing: border-box;
-  pointer-events: none;
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   transition:
-    opacity 0.2s ease,
-    border-color 0.2s ease,
+    filter 0.2s ease,
     transform 0.2s ease;
-}
-
-.slots-counter-button:hover::before {
-  opacity: 1;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 @keyframes slots-counter-button-pulse {
@@ -300,29 +277,29 @@ body,
 
 .slots-counter-button:hover {
   animation: slots-counter-button-pulse 0.9s ease-in-out infinite;
-  filter: brightness(1.12);
+  filter: brightness(1.12) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .slots-counter-button:active {
   animation: none;
   transform: scale(0.97);
-  filter: brightness(1.2);
+  filter: brightness(0.97) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .slots-counter-button:focus-visible {
   outline: none;
+  box-shadow:
+    0 0 0 4px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.18);
 }
 
 .slots-counter-button__icon {
-  position: relative;
-  z-index: 1;
-  width: var(--clicker-button-icon-size);
-  height: var(--clicker-button-icon-size);
+  width: 1.2rem;
+  height: 1.2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
 }
 
 .slots-counter-button__icon img,
@@ -340,21 +317,23 @@ body,
 }
 
 .slots-counter-button__text {
-  position: relative;
-  z-index: 1;
   display: block;
   min-width: 0;
   max-width: 100%;
   font-family: "Manrope", sans-serif;
-  font-size: 1.12rem;
+  font-size: 0.98rem;
   font-weight: 800;
   letter-spacing: 0.01em;
   color: #ffffff;
   line-height: 1;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
+}
+
+.slots-counter-button:disabled,
+.slots-counter-button[aria-disabled="true"] {
+  opacity: 0.6;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -368,9 +347,9 @@ body,
 }
 
 @media (max-width: 640px) {
-  .top-left-actions {
-    top: calc(0.85rem + env(safe-area-inset-top));
-    left: calc(0.85rem + env(safe-area-inset-left));
+  .landing {
+    padding-left: calc(0.85rem + env(safe-area-inset-left));
+    padding-right: calc(0.85rem + env(safe-area-inset-right));
   }
 
   .game-title {
@@ -384,5 +363,42 @@ body,
 
   .cta-copy {
     font-size: 1.08rem;
+  }
+
+  .bottom-actions {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  }
+}
+
+@media (max-width: 720px), (max-height: 720px) {
+  .content {
+    justify-content: flex-start;
+    padding-top: clamp(1.5rem, 5vh, 3.5rem);
+  }
+
+  .game-title {
+    margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+
+  .cta-panel {
+    width: auto;
+    gap: 0;
+    margin: auto 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .cta-copy {
+    display: none;
+  }
+
+  .bottom-actions {
+    display: none;
   }
 }

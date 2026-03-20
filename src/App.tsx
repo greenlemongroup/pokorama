@@ -1,6 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
-import { FaSteamSymbol } from "react-icons/fa";
-import { resolveBackgroundImageUrl } from "./lib/catalog";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaPinterestP,
+  FaSteamSymbol,
+  FaTiktok,
+  FaYoutube,
+} from "react-icons/fa";
+import {
+  fetchActionLinks,
+  resolveBackgroundImageUrl,
+  type ActionPlatform,
+  type CatalogActionLink,
+} from "./lib/catalog";
+
+const actionPlatformMeta: Record<
+  ActionPlatform,
+  { icon: typeof FaSteamSymbol }
+> = {
+  steamWishlist: { icon: FaSteamSymbol },
+  facebook: { icon: FaFacebookF },
+  instagram: { icon: FaInstagram },
+  pinterest: { icon: FaPinterestP },
+  tiktok: { icon: FaTiktok },
+  youtube: { icon: FaYoutube },
+};
 
 const pickBackgroundTier = () => {
   const maxViewport = Math.max(window.innerWidth, window.innerHeight);
@@ -15,11 +39,30 @@ function App() {
   const [backgroundTier, setBackgroundTier] = useState<"low" | "mid" | "high">(
     pickBackgroundTier,
   );
+  const [actionLinks, setActionLinks] = useState<CatalogActionLink[]>([]);
 
   useEffect(() => {
     const onResize = () => setBackgroundTier(pickBackgroundTier());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    let isActive = true;
+
+    void fetchActionLinks()
+      .then((links) => {
+        if (isActive) {
+          setActionLinks(links);
+        }
+      })
+      .catch((error: unknown) => {
+        console.error("Failed to load action links from catalog", error);
+      });
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   const backgroundImage = useMemo(
@@ -29,20 +72,6 @@ function App() {
 
   return (
     <main className="landing" style={{ backgroundImage }}>
-      <div className="top-left-actions">
-        <a
-          href="https://store.steampowered.com/"
-          className="steam-wishlist-button steam-wishlist-button--big"
-          aria-label="Visit on Steam"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span className="steam-wishlist-button__icon" aria-hidden="true">
-            <FaSteamSymbol />
-          </span>
-          <span className="steam-wishlist-button__text">Steam</span>
-        </a>
-      </div>
       <section className="content">
         <h1 className="game-title">pokorama</h1>
         <div className="cta-panel">
@@ -67,11 +96,32 @@ function App() {
                   alt=""
                 />
               </span>
-              <span className="slots-counter-button__text">Play</span>
+              <span className="slots-counter-button__text">Play Pokorama</span>
             </a>
           </div>
         </div>
       </section>
+      <div className="bottom-actions">
+        {actionLinks.map(({ href, label, platform }) => {
+          const { icon: Icon } = actionPlatformMeta[platform];
+
+          return (
+            <a
+              key={`${platform}-${href}`}
+              href={href}
+              className="steam-wishlist-button steam-wishlist-button--big"
+              aria-label={`Visit ${label}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="steam-wishlist-button__icon" aria-hidden="true">
+                <Icon />
+              </span>
+              <span className="steam-wishlist-button__text">{label}</span>
+            </a>
+          );
+        })}
+      </div>
     </main>
   );
 }
