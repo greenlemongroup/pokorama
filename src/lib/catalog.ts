@@ -35,7 +35,10 @@ const resolveSocialPlatform = (key: string): ActionPlatform | null => {
   if (!normalizedKey.startsWith("social")) return null;
   if (normalizedKey.includes("facebook")) return "facebook";
   if (normalizedKey.includes("instagram")) return "instagram";
-  if (normalizedKey.includes("pinterest") || normalizedKey.includes("pintterest")) {
+  if (
+    normalizedKey.includes("pinterest") ||
+    normalizedKey.includes("pintterest")
+  ) {
     return "pinterest";
   }
   if (normalizedKey.includes("tiktok")) return "tiktok";
@@ -131,7 +134,11 @@ export const fetchActionLinks = async (): Promise<CatalogActionLink[]> => {
     const platform = resolveSocialPlatform(key);
     if (!platform) continue;
 
-    actionLinks.push({ href, label: getSocialActionLabel(key, platform), platform });
+    actionLinks.push({
+      href,
+      label: getSocialActionLabel(key, platform),
+      platform,
+    });
   }
 
   return actionLinks;

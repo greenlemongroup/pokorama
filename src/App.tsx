@@ -69,17 +69,34 @@ function App() {
     () => `url("${resolveBackgroundImageUrl(backgroundTier)}")`,
     [backgroundTier],
   );
+  const steamActionLink = useMemo(
+    () => actionLinks.find(({ platform }) => platform === "steamWishlist"),
+    [actionLinks],
+  );
 
   return (
     <main className="landing" style={{ backgroundImage }}>
+      {steamActionLink ? (
+        <a
+          href={steamActionLink.href}
+          className="mobile-steam-action steam-wishlist-button"
+          aria-label={`Visit ${steamActionLink.label}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="steam-wishlist-button__icon" aria-hidden="true">
+            <FaSteamSymbol />
+          </span>
+        </a>
+      ) : null}
       <section className="content">
         <h1 className="game-title">pokorama</h1>
         <div className="cta-panel">
           <p className="cta-copy">
-            <strong>Pokorama</strong> is a relaxing design game where
-            creativity takes center stage. Transform fully furnished blank
-            rooms into warm, inviting spaces using a rich collection of
-            fabrics, textures, patterns, and paints.
+            <strong>Pokorama</strong> is a relaxing design game where creativity
+            takes center stage. Transform fully furnished blank rooms into warm,
+            inviting spaces using a rich collection of fabrics, textures,
+            patterns, and paints.
           </p>
           <div className="store-buttons">
             <a

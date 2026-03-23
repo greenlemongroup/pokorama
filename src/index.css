@@ -117,6 +117,14 @@ body,
   z-index: 2;
 }
 
+.mobile-steam-action.steam-wishlist-button {
+  display: none;
+  position: fixed;
+  top: calc(0.85rem + env(safe-area-inset-top));
+  left: calc(0.85rem + env(safe-area-inset-left));
+  z-index: 3;
+}
+
 .steam-wishlist-button {
   --clicker-button-size: 40px;
   --clicker-button-icon-size: 16px;
@@ -242,6 +250,18 @@ body,
   --clicker-button-gap: 10px;
   --clicker-button-padding-x: 18px;
   --clicker-button-font-size: 14px;
+}
+
+.mobile-steam-action.steam-wishlist-button {
+  --clicker-button-size: 44px;
+  --clicker-button-icon-size: 20px;
+  --clicker-button-gap: 0;
+  --clicker-button-padding-x: 0;
+  width: var(--clicker-button-size);
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  flex: none;
 }
 
 .slots-counter-button {
@@ -372,6 +392,10 @@ body,
 }
 
 @media (max-width: 720px), (max-height: 720px) {
+  .mobile-steam-action.steam-wishlist-button {
+    display: inline-flex;
+  }
+
   .content {
     justify-content: flex-start;
     padding-top: clamp(1.5rem, 5vh, 3.5rem);
