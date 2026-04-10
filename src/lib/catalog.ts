@@ -87,6 +87,9 @@ const getSocialActionLabel = (key: string, platform: ActionPlatform) => {
 
 export const getCatalogUrl = () => `${CDN_BASE_URL}/${CATALOG_PATH}`;
 
+export const resolveCdnAssetUrl = (assetPath: string) =>
+  `${CDN_BASE_URL}/${assetPath.replace(/^\/+/, "")}`;
+
 export const resolveBackgroundImageUrl = (tier: "low" | "mid" | "high") =>
   `${CDN_BASE_URL}/${tier}/raster/splash_screens/splash_01.webp`;
 

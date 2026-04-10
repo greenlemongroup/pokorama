@@ -60,13 +60,14 @@ body,
   padding-top: clamp(1.5rem, 5vh, 3.5rem);
 }
 
-/* Base pokorama logo style */
 .game-title {
-  font-family: "LT Saeada", sans-serif;
-  font-weight: 500;
-  font-size: 4rem;
+  width: min(24rem, 72vw);
+  height: auto;
+  display: block;
   margin: 0 0 clamp(2rem, 8vh, 4.5rem);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .cta-panel {
@@ -95,10 +96,10 @@ body,
 
 .store-buttons {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
 .store-link {
@@ -284,6 +285,12 @@ body,
   color: #ffffff;
 }
 
+.cta-button--white {
+  color: #f26c66;
+  background: #faf5f4;
+  border-color: #f26c66;
+}
+
 @keyframes slots-counter-button-pulse {
   0%,
   100% {
@@ -351,6 +358,10 @@ body,
   text-overflow: clip;
 }
 
+.cta-button--white .slots-counter-button__text {
+  color: inherit;
+}
+
 .slots-counter-button:disabled,
 .slots-counter-button[aria-disabled="true"] {
   opacity: 0.6;
@@ -373,7 +384,7 @@ body,
   }
 
   .game-title {
-    font-size: 3rem;
+    width: min(20rem, 76vw);
   }
 
   .cta-panel {

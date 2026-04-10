@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import {
   fetchActionLinks,
+  resolveCdnAssetUrl,
   resolveBackgroundImageUrl,
   type ActionPlatform,
   type CatalogActionLink,
@@ -73,24 +74,37 @@ function App() {
     () => actionLinks.find(({ platform }) => platform === "steamWishlist"),
     [actionLinks],
   );
+  const facebookActionLink = useMemo(
+    () => actionLinks.find(({ platform }) => platform === "facebook"),
+    [actionLinks],
+  );
+  const logoImage = useMemo(
+    () => resolveCdnAssetUrl("/shared/logos/pokorama_logo.png"),
+    [],
+  );
 
   return (
     <main className="landing" style={{ backgroundImage }}>
-      {steamActionLink ? (
+      {facebookActionLink ? (
         <a
-          href={steamActionLink.href}
+          href={facebookActionLink.href}
           className="mobile-steam-action steam-wishlist-button"
-          aria-label={`Visit ${steamActionLink.label}`}
+          aria-label={`Visit ${facebookActionLink.label}`}
           target="_blank"
           rel="noreferrer"
         >
           <span className="steam-wishlist-button__icon" aria-hidden="true">
-            <FaSteamSymbol />
+            <FaFacebookF />
           </span>
         </a>
       ) : null}
       <section className="content">
-        <h1 className="game-title">pokorama</h1>
+        <img
+          className="game-title"
+          src={logoImage}
+          alt="Pokorama"
+          draggable={false}
+        />
         <div className="cta-panel">
           <p className="cta-copy">
             <strong>Pokorama</strong> is a relaxing design game where creativity
@@ -102,7 +116,7 @@ function App() {
             <a
               href="https://play.pokorama.com/"
               className="store-link slots-counter-button"
-              aria-label="Play Pokorama"
+              aria-label="Play Demo"
               target="_blank"
               rel="noreferrer"
             >
@@ -113,31 +127,50 @@ function App() {
                   alt=""
                 />
               </span>
-              <span className="slots-counter-button__text">Play Pokorama</span>
+              <span className="slots-counter-button__text">Play Demo</span>
             </a>
+            {steamActionLink ? (
+              <a
+                href={steamActionLink.href}
+                className="store-link slots-counter-button cta-button--white"
+                aria-label={`Visit ${steamActionLink.label}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="slots-counter-button__icon" aria-hidden="true">
+                  <FaSteamSymbol />
+                </span>
+                <span className="slots-counter-button__text">Visit Steam</span>
+              </a>
+            ) : null}
           </div>
         </div>
       </section>
       <div className="bottom-actions">
-        {actionLinks.map(({ href, label, platform }) => {
-          const { icon: Icon } = actionPlatformMeta[platform];
+        {actionLinks
+          .filter(({ platform }) => platform !== "steamWishlist")
+          .map(({ href, label, platform }) => {
+            const { icon: Icon } = actionPlatformMeta[platform];
 
-          return (
-            <a
-              key={`${platform}-${href}`}
-              href={href}
-              className="steam-wishlist-button steam-wishlist-button--big"
-              aria-label={`Visit ${label}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="steam-wishlist-button__icon" aria-hidden="true">
-                <Icon />
-              </span>
-              <span className="steam-wishlist-button__text">{label}</span>
-            </a>
-          );
-        })}
+            return (
+              <a
+                key={`${platform}-${href}`}
+                href={href}
+                className="steam-wishlist-button steam-wishlist-button--big"
+                aria-label={`Visit ${label}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span
+                  className="steam-wishlist-button__icon"
+                  aria-hidden="true"
+                >
+                  <Icon />
+                </span>
+                <span className="steam-wishlist-button__text">{label}</span>
+              </a>
+            );
+          })}
       </div>
     </main>
   );
