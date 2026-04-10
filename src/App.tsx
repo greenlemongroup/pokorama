@@ -90,8 +90,6 @@ function App() {
           href={facebookActionLink.href}
           className="mobile-steam-action steam-wishlist-button"
           aria-label={`Visit ${facebookActionLink.label}`}
-          target="_blank"
-          rel="noreferrer"
         >
           <span className="steam-wishlist-button__icon" aria-hidden="true">
             <FaFacebookF />
@@ -117,8 +115,6 @@ function App() {
               href="https://play.pokorama.com/"
               className="store-link slots-counter-button"
               aria-label="Play Demo"
-              target="_blank"
-              rel="noreferrer"
             >
               <span className="slots-counter-button__icon" aria-hidden="true">
                 <img
@@ -134,8 +130,6 @@ function App() {
                 href={steamActionLink.href}
                 className="store-link slots-counter-button cta-button--white"
                 aria-label={`Visit ${steamActionLink.label}`}
-                target="_blank"
-                rel="noreferrer"
               >
                 <span className="slots-counter-button__icon" aria-hidden="true">
                   <FaSteamSymbol />
@@ -158,8 +152,6 @@ function App() {
                 href={href}
                 className="steam-wishlist-button steam-wishlist-button--big"
                 aria-label={`Visit ${label}`}
-                target="_blank"
-                rel="noreferrer"
               >
                 <span
                   className="steam-wishlist-button__icon"
