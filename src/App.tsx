@@ -119,7 +119,7 @@ function App() {
               <span className="slots-counter-button__icon" aria-hidden="true">
                 <img
                   className="store-icon"
-                  src="https://cdn.pokorama.com/play/shared/icons/normal/sparkle.png"
+                  src="https://cdn.pokorama.com/demo/shared/icons/normal/sparkle.png"
                   alt=""
                 />
               </span>
